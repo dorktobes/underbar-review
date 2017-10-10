@@ -189,9 +189,12 @@
       });
 
       it('should override properties found on the destination', function() {
-        // Replace this line with an `expect` statement that tests
-        // the behavior described by the `it` string
-        throw new Error('This test is missing.');
+        var destination = { a: 'b'};
+        var source = { a: 'c'};
+        var extend = _.extend(destination, source);
+        
+        expect(extend).to.eql(source);
+        
       });
 
       it('should not override properties not found in the source', function() {
