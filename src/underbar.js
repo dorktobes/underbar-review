@@ -58,7 +58,9 @@
         iterator(collection[i], i, collection);
       }
     } else {
-      
+      for (var prop in collection) {
+        iterator(collection[prop], prop, collection);
+      }
     }
   };
 
