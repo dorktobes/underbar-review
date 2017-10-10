@@ -104,8 +104,33 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var uniqueValues = [];
+        
+    if (arguments > 1 && isSorted) {
+      _.each(array, function(elem) {
+        if (uniqueValues[uniqueValues.length - 1] !== elem) {
+          uniqueValues.push(elem);
+        }    
+      });    
+    } else {
+      var obj = {};
+      _.each(array, function(elem) {
+        obj[elem] = elem;
+      });
+      
+      _.each(obj, function(val) {
+        uniqueValues.push(val);
+      });
+    }
 
+    if (arguments.length === 3) {
+      var arr = [];
+      arr.push( _.filter(uniqueValues, iterator)[0]);
+      arr.push(_.reject(uniqueValues, iterator)[0]);
+      return arr;
+    }
     
+    return uniqueValues;
   };
 
 
