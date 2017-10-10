@@ -228,8 +228,15 @@
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.some = function(collection, iterator) {
+  _.some = function(collection, iterator = _.identity) {
     // TIP: There's a very clever way to re-use every() here.
+    var hasTruthyValue = false;
+    _.each(collection, function(elem) {
+      if (iterator(elem)) {
+        hasTruthyValue = true;
+      }  
+    });  
+    return hasTruthyValue;
   };
 
 
