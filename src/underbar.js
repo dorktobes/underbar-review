@@ -374,7 +374,7 @@
       indexes.push(i);
     }
     for (let i = 0; i < array.length; i++) {
-      var randomIndex = Math.floor(Math.random() * indexes.length);
+      var randomIndex = indexes[Math.floor(Math.random() * indexes.length)];
       shuffleArray.push(array[randomIndex]);
       indexes.splice(randomIndex, 1);
 
@@ -418,6 +418,18 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    // input nested array
+    // output single dimension array (flat)
+    var flatArr = [];
+    
+    for (var i = 0; i < nestedArray.length; i++) {
+      if (Array.isArray(nestedArray[i])) {
+        flatArr = flatArr.concat(_.flatten(nestedArray[i]));
+      } else {
+        flatArr.push(nestedArray[i]);
+      }
+    }    
+    return flatArr;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
